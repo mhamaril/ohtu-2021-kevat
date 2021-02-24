@@ -6,10 +6,8 @@ def sort_by_points(player):
 
 
 class Statistics:
-    def __init__(self):
-        reader = PlayerReader(
-            "https://nhlstatisticsforohtu.herokuapp.com/players.txt"
-        )
+    def __init__(self, reader):
+        self._reader = reader
 
         self._players = reader.get_players()
 
@@ -25,7 +23,6 @@ class Statistics:
             lambda player: player.team == team_name,
             self._players
         )
-
         return list(players_of_team)
 
     def top_scorers(self, how_many):
@@ -37,7 +34,7 @@ class Statistics:
 
         result = []
         i = 0
-        while i <= how_many:
+        while i < how_many:
             result.append(sorted_players[i])
             i += 1
 
